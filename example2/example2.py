@@ -30,12 +30,16 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
+plt.ion()
+
 for step in range(201):
     sess.run(train)
-    if step % 20 == 0:
-        print(step, sess.run(Weights), sess.run(biases))
+    if step % 5 == 0:
+        plt.cla()
+        plt.plot(x_data, y_data, '.')
         plt.plot(x_data, sess.run(Weights) * x_data + sess.run(biases), c='C1')
+        plt.pause(0.1)
 
-plt.plot(x_data, y_data)
+plt.ioff()
 plt.show()
 
